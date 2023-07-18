@@ -9,17 +9,17 @@ class App {
    * боковой колонки
    * */
   static init() {
-    this.element = document.querySelector(".app");
-    this.content = document.querySelector(".content-wrapper");
+    this.element = document.querySelector(".app")
+    this.content = document.querySelector(".content-wrapper")
 
-    this.initPages();
-    this.initForms();
-    this.initModals();
-    this.initWidgets();
+    this.initPages()
+    this.initForms()
+    this.initModals()
+    this.initWidgets()
 
-    Sidebar.init();
+    Sidebar.init()
 
-    this.initUser();
+    this.initUser()
   }
 
   /**
@@ -31,7 +31,7 @@ class App {
    * состояние 'init'
    * */
   static initUser() {
-    User.fetch(() => this.setState(User.current() ? "user-logged" : "init"));
+    User.fetch(() => this.setState(User.current() ? "user-logged" : "init"))
   }
 
   /**
@@ -41,7 +41,7 @@ class App {
   static initPages() {
     this.pages = {
       transactions: new TransactionsPage(this.content),
-    };
+    }
   }
 
   /**
@@ -54,7 +54,7 @@ class App {
       createAccount: new Modal(document.querySelector("#modal-new-account")),
       newIncome: new Modal(document.querySelector("#modal-new-income")),
       newExpense: new Modal(document.querySelector("#modal-new-expense")),
-    };
+    }
   }
 
   /**
@@ -67,7 +67,7 @@ class App {
         document.querySelector(".transactions-panel")
       ),
       user: new UserWidget(document.querySelector(".user-panel")),
-    };
+    }
   }
 
   /**
@@ -86,7 +86,7 @@ class App {
       createExpense: new CreateTransactionForm(
         document.querySelector("#new-expense-form")
       ),
-    };
+    }
   }
 
   /**
@@ -96,7 +96,7 @@ class App {
    * App.getModal( 'login' ); // извелекает App.modals.login
    * */
   static getModal(modalName) {
-    return this.modals[modalName];
+    return this.modals[modalName]
   }
 
   /**
@@ -106,7 +106,7 @@ class App {
    * App.getPage( 'transactions' ); // извелекает App.pages.transactions
    * */
   static getPage(pageName) {
-    return this.pages[pageName];
+    return this.pages[pageName]
   }
 
   /**
@@ -116,7 +116,7 @@ class App {
    * App.getWidget( 'transactions' ); // извелекает App.widgets.transactions
    * */
   static getWidget(widgetName) {
-    return this.widgets[widgetName];
+    return this.widgets[widgetName]
   }
 
   /**
@@ -126,7 +126,7 @@ class App {
    * App.getWidget( 'transactions' ); // извелекает App.forms.transactions
    * */
   static getForm(formName) {
-    return this.forms[formName];
+    return this.forms[formName]
   }
 
   /**
@@ -135,8 +135,8 @@ class App {
    * и передаёт туда объект options
    * */
   static showPage(pageName, options) {
-    const page = this.getPage(pageName);
-    page.render(options);
+    const page = this.getPage(pageName)
+    page.render(options)
   }
 
   /**
@@ -151,16 +151,16 @@ class App {
    * */
   static setState(state) {
     if (this.state) {
-      this.element.classList.remove(`app_${this.state}`);
+      this.element.classList.remove(`app_${this.state}`)
     }
-    this.element.classList.add(`app_${state}`);
-    this.state = state;
+    this.element.classList.add(`app_${state}`)
+    this.state = state
 
     if (state === "user-logged") {
-      this.update();
+      this.update()
     }
     if (state === "init") {
-      this.clear();
+      this.clear()
     }
   }
 
@@ -171,7 +171,7 @@ class App {
    * метод clear()
    * */
   static clear() {
-    this.getPage("transactions").clear();
+    this.getPage("transactions").clear()
   }
 
   /**
@@ -179,9 +179,9 @@ class App {
    * Вызывает методы updateWidgets и updatePages()
    * */
   static update() {
-    this.updateWidgets();
-    this.updatePages();
-    this.updateForms();
+    this.updateWidgets()
+    this.updatePages()
+    this.updateForms()
   }
 
   /**
@@ -191,7 +191,7 @@ class App {
    * метод update()
    * */
   static updatePages() {
-    this.getPage("transactions").update();
+    this.getPage("transactions").update()
   }
 
   /**
@@ -199,12 +199,12 @@ class App {
    * accounts и user
    * */
   static updateWidgets() {
-    this.getWidget("accounts").update();
-    this.getWidget("user").update();
+    this.getWidget("accounts").update()
+    this.getWidget("user").update()
   }
 
   static updateForms() {
-    this.getForm("createIncome").renderAccountsList();
-    this.getForm("createExpense").renderAccountsList();
+    this.getForm("createIncome").renderAccountsList()
+    this.getForm("createExpense").renderAccountsList()
   }
 }
